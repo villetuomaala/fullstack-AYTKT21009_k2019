@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from './Header'
 import Content from './Content'
+import Total from './Total'
 
 const App = () => {
   const course = 'Half Stack -sovelluskehitys'
@@ -15,7 +16,7 @@ const App = () => {
     <div>
       <Header value={course}/>
       <Content value={parts}/>
-      <p>yhteensä {parts[0].count + parts[1].count + parts[2].count} tehtävää</p>
+      <Total value={parts}/>
     </div>
   )
 }
