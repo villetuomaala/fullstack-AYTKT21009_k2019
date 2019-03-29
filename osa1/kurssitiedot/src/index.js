@@ -7,24 +7,26 @@ import Total from './Total'
 
 const App = () => {
   const course = 'Half Stack -sovelluskehitys'
-  const part1 = {
-    name: 'Reactin perusteet',
-    exercises: 10
-  }
-  const part2 = {
-    name: 'Tiedonvälitys propseilla',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'Komponenttien tila',
-    exercises: 14
-  }
+  const parts = [
+    {
+      name: 'Reactin perusteet',
+      exercises: 10
+    },
+    {
+      name: 'Tiedonvälitys propseilla',
+      exercises: 7
+    },
+    {
+      name: 'Komponenttien tila',
+      exercises: 14
+    }
+  ]
 
   return (
     <div>
       <Header value={course}/>
-      <Content value={[part1,part2,part3]}/>
-      <Total value={[part1,part2,part3]}/>
+      <Content value={parts}/>
+      <Total value={parts}/>
     </div>
   )
 }
