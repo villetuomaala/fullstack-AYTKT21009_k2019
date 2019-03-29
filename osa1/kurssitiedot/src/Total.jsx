@@ -6,7 +6,7 @@ function getSum(total, num) {
 
 const Total = (props) => {
     return (
-        <p>yhteensä {props.value.map(cnt => cnt.count).reduce(getSum)} tehtävää</p>
+        <p>yhteensä {props.value.map(cnt => cnt.exercises).reduce(getSum)} tehtävää</p>
     )
 }
 

@@ -4,19 +4,27 @@ import Header from './Header'
 import Content from './Content'
 import Total from './Total'
 
+
 const App = () => {
   const course = 'Half Stack -sovelluskehitys'
-  const parts = [
-    {name: 'Reactin perusteet', count: 10}, 
-    {name: 'Tiedonvälitys propseilla', count: 7},
-    {name: 'Komponenttien tila', count: 14}
-  ]
+  const part1 = {
+    name: 'Reactin perusteet',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Tiedonvälitys propseilla',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'Komponenttien tila',
+    exercises: 14
+  }
 
   return (
     <div>
       <Header value={course}/>
-      <Content value={parts}/>
-      <Total value={parts}/>
+      <Content value={[part1,part2,part3]}/>
+      <Total value={[part1,part2,part3]}/>
     </div>
   )
 }
