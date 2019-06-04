@@ -23,6 +23,21 @@ const Statistics = (props)  => {
     )
 }
 
+const Table = (props) => {
+    return (
+        <table>
+            {props.data.map(row => {
+                return (
+                    <tr>
+                        <td>{row.text}</td>
+                        <td>{row.value}</td>
+                    </tr>
+                )
+            })}
+        </table>
+    )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -45,6 +60,15 @@ const App = () => {
       }
   }
 
+const tableData = [
+    {text: 'hyvä', value: good},
+    {text: 'neutraali', value: neutral},
+    {text: 'huono', value: bad},
+    {text: 'yhteensä', value: good-bad},
+    {text: 'keskiarvo', value: (good-bad)/(good+neutral+bad)},
+    {text: 'positiivisia', value: (good/(good+neutral+bad)*100).toString()+'%'}
+]
+
   return (
     <div>
       <Header value="anna palautetta"/>
@@ -55,12 +79,7 @@ const App = () => {
       <Header value="statistiikka"/>
       { good+neutral+bad !== 0 ?
         <div>
-            <Statistics text="hyvä" value={good}/>
-            <Statistics text="neutraali" value={neutral}/>
-            <Statistics text="huono" value={bad}/>
-            <Statistics text="yhteensä" value={good-bad}/>
-            <Statistics text="keskiarvo" value={(good-bad)/(good+neutral+bad)}/>
-            <Statistics text="positiivisia" value={(good/(good+neutral+bad)*100).toString()+'%'}/>
+            <Table data={tableData} />
         </div>
         :
         <div>Ei yhtään palautetta annettu</div>
