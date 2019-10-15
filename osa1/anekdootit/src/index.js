@@ -11,13 +11,36 @@ const Button = (props) => {
 
 const App = (props) => {
   const [selected, setSelected] = useState(0);
+  const [mostVoted, setMostVoted] = useState(0);
+
+  const handleVoting = () => {
+    votes[selected] += 1;
+    setMostVoted(getMostVoted());
+  }
+
+  const getMostVoted = () => {
+    let indx = 0;
+    let maxValue = 0;
+    let maxIndx = 0;
+    for (const i of votes) {
+      if (i > maxValue) {
+        maxIndx = indx;
+        maxValue = i;
+      }
+      indx++;
+    }
+    return maxIndx;
+  }
 
   return (
     <div>
+        <h2>Anecdote of the day</h2>
         <Button value="next" handleClick={() => setSelected(Math.floor((Math.random() * anecdotes.length) + 0))} />
-        <Button value="vote this" handleClick={() => votes[selected] += 1} />
+        <Button value="vote this" handleClick={() => (handleVoting())} />
         <br/>
         {props.anecdotes.find(o => o.id === selected).value}
+        <h2>Anecdote with most votes</h2>
+        {props.anecdotes.find(o => o.id === mostVoted).value}
     </div>
   )
 }
@@ -31,9 +54,9 @@ const anecdotes = [
   { id: 5, value: 'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.' }
 ]
 
-const votes = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+const votes = [0,0,0,0,0,0];
 
 ReactDOM.render(
-  <App anecdotes={anecdotes} />,
+  <App anecdotes={anecdotes} votes={votes}/>,
   document.getElementById('root')
 )
