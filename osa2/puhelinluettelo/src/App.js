@@ -18,8 +18,13 @@ const App = (props) => {
 
   const addNewPerson = (event) => {
     event.preventDefault()
-    setPersons(persons.concat({ name: newName }))
-    setNewName('')
+
+    if (persons.map(p => p.name).includes(newName)) {
+      alert(`${newName} is already in phonebook`)
+    } else {
+      setPersons(persons.concat({ name: newName }))
+      setNewName('')
+    }
   }
 
   return (
