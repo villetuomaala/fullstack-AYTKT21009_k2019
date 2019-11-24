@@ -21,6 +21,11 @@ const App = (props) => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilterPersons = (event) => {
+    const filteredPersons = persons.filter(p => p.name.toLowerCase().includes(event.target.value.toLowerCase()))
+    setPersons(persons.map(p => !filteredPersons.includes(p) ? { ...p, display: false } : { ...p, display: true }))
+  }
+
   const addNewPerson = (event) => {
     event.preventDefault()
 
@@ -36,16 +41,13 @@ const App = (props) => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>filter: <input onChange={handleFilterPersons}/></div>
+      <br />
+      <h2>Add new person</h2>
       <form onSubmit={addNewPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameInputChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberInputChange}/>
-        </div>
-        <div>
-          <button type="submit" >add</button>
-        </div>
+        <div>name: <input value={newName} onChange={handleNameInputChange}/></div>
+        <div>number: <input value={newNumber} onChange={handleNumberInputChange}/></div>
+        <div><button type="submit" >add</button></div>
       </form>
       <h2>Numbers</h2>
       {rows()}
