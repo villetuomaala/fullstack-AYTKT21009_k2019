@@ -4,6 +4,7 @@ import Person from './components/Person'
 const App = (props) => {
   const [ persons, setPersons] = useState(props.persons) 
   const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
 
   const rows = () => persons.map(person =>
     <Person
@@ -13,7 +14,11 @@ const App = (props) => {
   )
 
   const handleNameInputChange = (event) => {
-    setNewName(event.target.value);
+    setNewName(event.target.value)
+  }
+
+  const handleNumberInputChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   const addNewPerson = (event) => {
@@ -22,8 +27,9 @@ const App = (props) => {
     if (persons.map(p => p.name).includes(newName)) {
       alert(`${newName} is already in phonebook`)
     } else {
-      setPersons(persons.concat({ name: newName }))
+      setPersons(persons.concat({ name: newName, number: newNumber }))
       setNewName('')
+      setNewNumber('')
     }
   }
 
@@ -33,6 +39,9 @@ const App = (props) => {
       <form onSubmit={addNewPerson}>
         <div>
           name: <input value={newName} onChange={handleNameInputChange}/>
+        </div>
+        <div>
+          number: <input value={newNumber} onChange={handleNumberInputChange}/>
         </div>
         <div>
           <button type="submit" >add</button>
