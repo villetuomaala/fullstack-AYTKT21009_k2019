@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
-import Person from './components/Person'
+import Persons from './components/Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
 
 const App = (props) => {
   const [ persons, setPersons] = useState(props.persons) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-
-  const rows = () => persons.map(person =>
-    <Person
-      key={person.name}
-      person={person}
-    />
-  )
 
   const handleNameInputChange = (event) => {
     setNewName(event.target.value)
@@ -26,13 +21,24 @@ const App = (props) => {
     setPersons(persons.map(p => !filteredPersons.includes(p) ? { ...p, display: false } : { ...p, display: true }))
   }
 
+  const inputs = [
+    { text: 'name',
+      id: 1,
+      value: newName,
+      handler: handleNameInputChange },
+    { text: 'number',
+      id: 2,
+      value: newNumber,
+      handler: handleNumberInputChange }
+  ]
+
   const addNewPerson = (event) => {
     event.preventDefault()
 
     if (persons.map(p => p.name).includes(newName)) {
       alert(`${newName} is already in phonebook`)
     } else {
-      setPersons(persons.concat({ name: newName, number: newNumber }))
+      setPersons(persons.concat({ name: newName, number: newNumber, display: true }))
       setNewName('')
       setNewNumber('')
     }
@@ -41,16 +47,12 @@ const App = (props) => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>filter: <input onChange={handleFilterPersons}/></div>
+      <Filter handler={handleFilterPersons} />
       <br />
       <h2>Add new person</h2>
-      <form onSubmit={addNewPerson}>
-        <div>name: <input value={newName} onChange={handleNameInputChange}/></div>
-        <div>number: <input value={newNumber} onChange={handleNumberInputChange}/></div>
-        <div><button type="submit" >add</button></div>
-      </form>
+      <PersonForm inputs={inputs} submit={addNewPerson} />
       <h2>Numbers</h2>
-      {rows()}
+      <Persons persons={persons} />
     </div>
   )
 
