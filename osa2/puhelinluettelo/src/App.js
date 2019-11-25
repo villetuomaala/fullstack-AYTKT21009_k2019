@@ -22,14 +22,18 @@ const App = (props) => {
   }
 
   const inputs = [
-    { text: 'name',
+    { 
+      text: 'name',
       id: 1,
       value: newName,
-      handler: handleNameInputChange },
-    { text: 'number',
+      handler: handleNameInputChange 
+    },
+    { 
+      text: 'number',
       id: 2,
       value: newNumber,
-      handler: handleNumberInputChange }
+      handler: handleNumberInputChange 
+    }
   ]
 
   const addNewPerson = (event) => {
