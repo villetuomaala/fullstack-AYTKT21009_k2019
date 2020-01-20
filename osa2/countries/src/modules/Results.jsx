@@ -11,7 +11,9 @@ const Result = ({ data }) => {
 
   return (
     data.map(d => 
-      <div key={d.numericCode}>{d.name}</div>
+      <div key={d.numericCode}>
+        {d.name}
+      </div>
     )
   )
 }
