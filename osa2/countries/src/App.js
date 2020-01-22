@@ -6,7 +6,13 @@ import axios from 'axios'
 const App = () => {
   const [ countriesData, setCountriesData ] = useState([]) 
   const [ result, setResult ] = useState([]) 
-  const countriesEndpoint = 'https://restcountries.eu/rest/v2/all'
+
+  const countriesAPI = {
+    baseUrl: 'https://restcountries.eu/rest/v2/',
+    endpoints: {
+      all: 'all'
+    }
+  }
 
   const handleSearchCountries = (event) => {
     const res = countriesData.filter(c => c.name.toLowerCase().includes(event.target.value.toLowerCase()))
@@ -20,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get(countriesEndpoint)
+      .get(`${countriesAPI.baseUrl}${countriesAPI.endpoints.all}`)
       .then(response => {
         setCountriesData(response.data)
       })
