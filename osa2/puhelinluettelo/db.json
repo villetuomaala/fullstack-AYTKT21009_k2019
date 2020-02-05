@@ -1,24 +1,40 @@
 {
   "persons": [
     {
+      "id": 1,
       "name": "Ville Tuomaala",
       "number": "050 438 0847",
       "display": true
     },
     {
+      "id": 2,
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "display": true
     },
     {
+      "id": 3,
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "display": true
     },
     {
+      "id": 4,
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "display": true
+    },
+    {
+      "name": "Aatos Tuomaala",
+      "number": "05055555555",
+      "display": true,
+      "id": 5
+    },
+    {
+      "name": "Kaarlo Tuomaala",
+      "number": "0404444444",
+      "display": true,
+      "id": 6
     }
   ]
 }
