@@ -29,6 +29,15 @@ const App = () => {
     setPersons(persons.map(p => !filteredPersons.includes(p) ? { ...p, display: false } : { ...p, display: true }))
   }
 
+  const handleDeletePerson = (id, name) => {
+    if (window.confirm(`Delete person ${name}?`)) {
+      personService.remove(id)
+        .then(deletedPerson => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
+  }
+
   const inputs = [
     { 
       text: 'name',
@@ -67,7 +76,7 @@ const App = () => {
       <h2>Add new person</h2>
       <PersonForm inputs={inputs} submit={addNewPerson} />
       <h2>Numbers</h2>
-      <Persons persons={persons} />
+      <Persons persons={persons} deleteHandler={handleDeletePerson}/>
     </div>
   )
 
