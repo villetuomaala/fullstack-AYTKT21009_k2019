@@ -56,15 +56,24 @@ const App = () => {
   const addNewPerson = (event) => {
     event.preventDefault()
 
-    if (persons.map(p => p.name).includes(newName)) {
-      alert(`${newName} is already in phonebook`)
+    const filteredPersons = persons.filter(p => p.name === newName)
+    
+    if (filteredPersons.length > 0 && window.confirm(`This phonebook already includes ${newName}. Replace the person with new number?`)) {
+      filteredPersons.map(p => 
+        personService.update(p.id, { "id": p.id, "name": newName, "number": newNumber, "display": true })
+          .then(updatedPerson => {
+            setPersons(persons.filter(pe => pe.id !== p.id).concat(updatedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
+      )
     } else {
       personService.create({ name: newName, number: newNumber, display: true })
-      .then(person => {
-        setPersons(persons.concat(person))
-        setNewName('')
-        setNewNumber('')
-      })
+        .then(person => {
+          setPersons(persons.concat(person))
+          setNewName('')
+          setNewNumber('')
+        })
     }
   }
 
