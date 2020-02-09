@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
+import Notification from './components/Notification'
 import personService from './services/person'
 
 const App = () => {
   const [ persons, setPersons] = useState([]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
+  const [ message, setMessage ] = useState({})
 
   useEffect(() => {
     personService.getAll()
@@ -34,8 +36,14 @@ const App = () => {
       personService.remove(id)
         .then(deletedPerson => {
           setPersons(persons.filter(p => p.id !== id))
+          displayMessage(`Person ${name} deleted`, 'success')
         })
     }
+  }
+
+  const displayMessage = (msg, msgType) => {
+    setMessage({ content: msg, type: msgType })
+    setTimeout(() => setMessage({}), 5000)
   }
 
   const inputs = [
@@ -65,6 +73,7 @@ const App = () => {
             setPersons(persons.filter(pe => pe.id !== p.id).concat(updatedPerson))
             setNewName('')
             setNewNumber('')
+            displayMessage(`Person ${updatedPerson.name} updated`, 'success')
           })
       )
     } else {
@@ -73,12 +82,15 @@ const App = () => {
           setPersons(persons.concat(person))
           setNewName('')
           setNewNumber('')
+
+          displayMessage(`Added new person ${person.name}`, 'success')
         })
     }
   }
 
   return (
     <div>
+      <Notification message={message.content} type={message.type} />
       <h2>Phonebook</h2>
       <Filter handler={handleFilterPersons} />
       <br />

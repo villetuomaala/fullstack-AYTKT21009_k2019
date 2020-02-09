@@ -17,6 +17,18 @@
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "display": true
+    },
+    {
+      "name": "Kaarlo Tuomaala",
+      "number": "04040400404",
+      "display": true,
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "Aatos Tuomaala",
+      "number": "1",
+      "display": true
     }
   ]
 }
