@@ -75,6 +75,12 @@ const App = () => {
             setNewNumber('')
             displayMessage(`Person ${updatedPerson.name} updated`, 'success')
           })
+          .catch(error => {
+            displayMessage(`Person ${newName} already deleted from server.`, 'error')
+            setPersons(persons.filter(pe => pe.id !== p.id))
+            setNewName('')
+            setNewNumber('')
+          })
       )
     } else {
       personService.create({ name: newName, number: newNumber, display: true })
@@ -82,7 +88,6 @@ const App = () => {
           setPersons(persons.concat(person))
           setNewName('')
           setNewNumber('')
-
           displayMessage(`Added new person ${person.name}`, 'success')
         })
     }
