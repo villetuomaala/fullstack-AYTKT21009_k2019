@@ -90,6 +90,9 @@ const App = () => {
           setNewNumber('')
           displayMessage(`Added new person ${person.name}`, 'success')
         })
+        .catch(error => {
+          displayMessage(error.response.data.error, 'error')
+        })
     }
   }
 
